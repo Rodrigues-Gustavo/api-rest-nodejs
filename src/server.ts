@@ -1,10 +1,10 @@
 import fastify from 'fastify'
-import { configKnex } from './database'
+import { knex } from './database'
 
 const server = fastify()
 
 server.get('/hello', async () => {
-  const tables = await configKnex('sqlite_schema').select('*')
+  const tables = await knex('sqlite_schema').select('*')
 
   return tables
 })
