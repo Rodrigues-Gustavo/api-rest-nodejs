@@ -60,7 +60,7 @@ export async function transactionsRoutes(server: FastifyInstance) {
     if (!sessionId) {
       sessionId = randomUUID()
 
-      res.cookie('sessionId', sessionId, {
+      res.setCookie('sessionId', sessionId, {
         path: '/',
         maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
       })
@@ -70,6 +70,7 @@ export async function transactionsRoutes(server: FastifyInstance) {
       id: randomUUID(),
       title,
       amount: type === 'credit' ? amount : amount * -1,
+      session_id: sessionId,
     })
 
     return res.status(201).send()
